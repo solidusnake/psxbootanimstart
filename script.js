@@ -1,13 +1,29 @@
 var sony = new Image();
 var computer = new Image();
+var count = 0;
+
 var sound = new Audio();
 function init(){
+  console.log('init', onLoad);
+  sony.onload = onLoad;
+  computer.onload = onLoad;
   sony.src = 'Sony_logo.png';
   computer.src = 'Computer_Entertainment_logo.png';
-  window.requestAnimationFrame(dessiner);
   //sound.src = "boot-up.mp3"
-  
+
+
 }
+
+function onLoad() {
+  
+  count++;
+  console.log(count)
+  if (count === 2) {
+    window.requestAnimationFrame(dessiner);
+  } 
+}
+
+
 var opacity = [0, 0];
 
 function dessiner() {
@@ -29,7 +45,6 @@ function dessiner() {
 
       ctx.globalAlpha = opacity[0];
       opacity[0] += 0.01
- 
       /*On crée un rectangle dont l'emplacement ne correspond pas
        *exactement à notre dégradé (décalé en bas à droite, vers le
        *violet)*/
@@ -43,18 +58,7 @@ function dessiner() {
       ctx.rotate(Math.PI / 4);
       ctx.translate(-(squareLength / 2), -(squareLength / 2));
       ctx.fillRect(0,0, squareLength, squareLength);
-                        //triangle transform
-                        ctx.beginPath();
-        
-                        ctx.moveTo(75, 50);
-                        ctx.lineTo(100, 75);
-                        ctx.lineTo(100, 25);
-                        
-                        ctx.fill();
-                        ctx.translate(canevas.width / 2, canevas.height / 2);
-                        ctx.translate(-(squareLength / 2), -(squareLength / 2));
-  
-                        ctx.closePath();
+
       ctx.restore();
       
       ctx.globalAlpha = opacity[1];
@@ -62,20 +66,38 @@ function dessiner() {
       console.log(opacity[0])
       if (opacity[0] > 1) {
         opacity[1] += 0.005;
-        ctx.drawImage(sony,130, 30, 250, 60);
-        ctx.drawImage(computer,140, 400, 250, 60);
-      }
-      
 
+      }
+
+      ctx.drawImage(sony,130, 30, 250, 60);
+      ctx.drawImage(computer,140, 400, 250, 60); 
       //ctx.drawImage(sony,130, 30, 250, 60);
       //ctx.drawImage(computer,140, 400, 250, 60);
+      ctx.fillStyle = '#4D4E53';
+      
 
+      ctx.translate(35, 200); // déplace au centre du rectangle 
+      // x = x + 0.5 * width
+      // y = y + 0.5 * height
+      //ctx.fillRect(150, 30, 100, 100);
+                              //triangle transform
+                              ctx.beginPath();
+        
+                              ctx.moveTo(80, 50);
+                              ctx.lineTo(200, 80);
+                              ctx.lineTo(200, 25);
+                              
+                              ctx.fill();
+                              //ctx.translate(canevas.width / 2, canevas.height / 2);
+                              //ctx.translate(-(squareLength / 2), -(squareLength / 2));
+        
+                              ctx.closePath();
 
       ctx.restore();
 
 
 
-      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
         dessiner();
         
         console.log("setinterval");
@@ -86,3 +108,4 @@ function dessiner() {
   }
 
 
+document.addEventListener("DOMContentLoaded", init);
