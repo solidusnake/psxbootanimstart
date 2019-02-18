@@ -75,27 +75,29 @@ function dessiner() {
       //ctx.drawImage(computer,140, 400, 250, 60);
       ctx.fillStyle = '#4D4E53';
       
+      function Triangle() { //objet triangle
 
-      ctx.translate(35, 200); // déplace au centre du rectangle 
-      // x = x + 0.5 * width
-      // y = y + 0.5 * height
-      //ctx.fillRect(150, 30, 100, 100);
-                              //triangle transform
-                              ctx.beginPath();
-        
-                              ctx.moveTo(80, 50);
-                              ctx.lineTo(200, 80);
-                              ctx.lineTo(200, 25);
-                              
-                              ctx.fill();
-                              //ctx.translate(canevas.width / 2, canevas.height / 2);
-                              //ctx.translate(-(squareLength / 2), -(squareLength / 2));
-        
-                              ctx.closePath();
-
-      ctx.restore();
+        ctx.translate(35, 200); // déplace au centre du rectangle 
+        // x = x + 0.5 * width
+        // y = y + 0.5 * height
+        //ctx.fillRect(150, 30, 100, 100);
+                                //triangle transform
+                                ctx.beginPath();
+                                ctx.moveTo(75, 50);
+                                ctx.lineTo(200, 175);
+                                ctx.lineTo(200, -75);
+                                ctx.fill();
+                                //ctx.translate(canevas.width / 2, canevas.height / 2);
+                                //ctx.translate(-(squareLength / 2), -(squareLength / 2));
+          
+                                ctx.closePath();
+                                ctx.restore();
+      }
 
 
+      
+
+      Personne = new Triangle();
 
         requestAnimationFrame(function() {
         dessiner();
